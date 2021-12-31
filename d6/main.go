@@ -6,27 +6,9 @@ import (
 	"io"
 	"strconv"
 	"strings"
+
+	"github.com/ikiris/aoc21/generic"
 )
-
-type SignedInteger interface {
-	int | int8 | int16 | int32 | int64
-}
-
-type UnSignedInteger interface {
-	uint | uint8 | uint16 | uint32 | uint64
-}
-
-type Number interface {
-	SignedInteger | UnSignedInteger
-}
-
-func AddMapVals[T Number, T2 comparable](m map[T2]T) T {
-	var result T
-	for _, n := range m {
-		result += n
-	}
-	return result
-}
 
 func p1(r io.Reader, days int) (int64, error) {
 	s := bufio.NewScanner(r)
@@ -54,5 +36,5 @@ func p1(r io.Reader, days int) (int64, error) {
 		}
 		fish = newfish
 	}
-	return AddMapVals(fish), nil
+	return generic.AddMapVals(fish), nil
 }
