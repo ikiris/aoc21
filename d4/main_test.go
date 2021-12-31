@@ -2,20 +2,11 @@ package main
 
 import (
 	"io"
-	"os"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/ikiris/aoc21/generic/testgeneric"
 )
-
-func getHandle(t *testing.T, s string) io.Reader {
-	t.Helper()
-	r, err := os.Open(s)
-	if err != nil {
-		t.Fatalf("failed to open testdata (%s): %v", s, err)
-	}
-	return r
-}
 
 var (
 	throwboard1 = board{
@@ -182,12 +173,12 @@ func TestP1(t *testing.T) {
 	}{
 		{
 			"basic",
-			getHandle(t, "testdata/input1.txt"),
+			testgeneric.GetHandle(t, "testdata/input1.txt"),
 			4512,
 			false,
 		}, {
 			"aocd4",
-			getHandle(t, "testdata/input2.txt"),
+			testgeneric.GetHandle(t, "testdata/input2.txt"),
 			0,
 			false,
 		},
@@ -214,12 +205,12 @@ func TestP2(t *testing.T) {
 	}{
 		{
 			"basic",
-			getHandle(t, "testdata/input1.txt"),
+			testgeneric.GetHandle(t, "testdata/input1.txt"),
 			1924,
 			false,
 		}, {
 			"aocd4",
-			getHandle(t, "testdata/input2.txt"),
+			testgeneric.GetHandle(t, "testdata/input2.txt"),
 			0,
 			false,
 		},

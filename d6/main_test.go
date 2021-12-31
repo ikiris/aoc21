@@ -2,18 +2,10 @@ package main
 
 import (
 	"io"
-	"os"
 	"testing"
-)
 
-func getHandle(t *testing.T, s string) io.Reader {
-	t.Helper()
-	r, err := os.Open(s)
-	if err != nil {
-		t.Fatalf("failed to open testdata (%s): %v", s, err)
-	}
-	return r
-}
+	"github.com/ikiris/aoc21/generic/testgeneric"
+)
 
 func TestP1(t *testing.T) {
 	tests := []struct {
@@ -25,21 +17,21 @@ func TestP1(t *testing.T) {
 	}{
 		{
 			"basic",
-			getHandle(t, "testdata/input1.txt"),
+			testgeneric.GetHandle(t, "testdata/input1.txt"),
 			80,
 			5934,
 			false,
 		},
 		{
 			"aocd6",
-			getHandle(t, "testdata/input2.txt"),
+			testgeneric.GetHandle(t, "testdata/input2.txt"),
 			80,
 			0,
 			false,
 		},
 		{
 			"aocd6p2",
-			getHandle(t, "testdata/input2.txt"),
+			testgeneric.GetHandle(t, "testdata/input2.txt"),
 			256,
 			0,
 			false,
