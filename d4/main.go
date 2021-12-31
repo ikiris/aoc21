@@ -55,14 +55,15 @@ func parseBoards(s *bufio.Scanner) ([]*board, error) {
 			continue
 		}
 		b = append(b, s.Text())
-		if len(b) == 5 {
-			board, err := parseBoard(b)
-			if err != nil {
-				return nil, errors.Wrapf(err, "failed parsing board(%v)", board)
-			}
-			boards = append(boards, board)
-			b = make([]string, 0, 5)
+		if len(b) < 5 {
+			continue
 		}
+		board, err := parseBoard(b)
+		if err != nil {
+			return nil, errors.Wrapf(err, "failed parsing board(%v)", board)
+		}
+		boards = append(boards, board)
+		b = make([]string, 0, 5)
 	}
 	return boards, nil
 }
