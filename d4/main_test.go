@@ -68,13 +68,13 @@ func TestParseBoard(t *testing.T) {
 	tests := []struct {
 		name    string
 		data    []string
-		want    board
+		want    *board
 		wantErr bool
 	}{
 		{
 			"Basic",
 			throwparse1,
-			throwboard1,
+			&throwboard1,
 			false,
 		},
 	}
@@ -136,7 +136,7 @@ func TestCall(t *testing.T) {
 	}
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			var boards []board
+			var boards []*board
 			for _, b := range tc.boards {
 				bp, err := parseBoard(b)
 				if err != nil {
@@ -195,6 +195,38 @@ func TestP1(t *testing.T) {
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
 			got, err := p1(tc.data)
+			if (err != nil) != tc.wantErr {
+				t.Errorf("func %s goterr: %v wanted: %v", tc.name, err, tc.wantErr)
+			}
+			if got != tc.want {
+				t.Errorf("func got: %d, want: %d", got, tc.want)
+			}
+		})
+	}
+}
+
+func TestP2(t *testing.T) {
+	tests := []struct {
+		name    string
+		data    io.Reader
+		want    uint64
+		wantErr bool
+	}{
+		{
+			"basic",
+			getHandle(t, "testdata/input1.txt"),
+			1924,
+			false,
+		}, {
+			"aocd4",
+			getHandle(t, "testdata/input2.txt"),
+			0,
+			false,
+		},
+	}
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			got, err := p2(tc.data)
 			if (err != nil) != tc.wantErr {
 				t.Errorf("func %s goterr: %v wanted: %v", tc.name, err, tc.wantErr)
 			}
