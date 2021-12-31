@@ -8,6 +8,26 @@ import (
 	"strings"
 )
 
+type SignedInteger interface {
+	int | int8 | int16 | int32 | int64
+}
+
+type UnSignedInteger interface {
+	uint | uint8 | uint16 | uint32 | uint64
+}
+
+type Number interface {
+	SignedInteger | UnSignedInteger
+}
+
+func AddMapVals[T Number, T2 comparable](m map[T2]T) T {
+	var result T
+	for _, n := range m {
+		result += n
+	}
+	return result
+}
+
 func p1(r io.Reader, days int) (int64, error) {
 	s := bufio.NewScanner(r)
 	if !s.Scan() {
@@ -34,5 +54,5 @@ func p1(r io.Reader, days int) (int64, error) {
 		}
 		fish = newfish
 	}
-	return fish[0] + fish[1] + fish[2] + fish[3] + fish[4] + fish[5] + fish[6] + fish[7] + fish[8], nil
+	return AddMapVals(fish), nil
 }
