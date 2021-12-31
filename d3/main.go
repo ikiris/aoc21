@@ -67,12 +67,8 @@ func zipfilter(intList []int64, pos int, comparable func(a, b int) bool) ([]int6
 
 func p2(r io.Reader) (int64, error) {
 	comp := map[string]func(a, b int) bool{
-		"one": func(a, b int) bool {
-			return a >= b
-		},
-		"zero": func(a, b int) bool {
-			return a < b
-		},
+		"one":  func(a, b int) bool { return a >= b },
+		"zero": func(a, b int) bool { return a < b },
 	}
 	s := bufio.NewScanner(r)
 	if !s.Scan() {
