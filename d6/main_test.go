@@ -37,6 +37,13 @@ func TestP1(t *testing.T) {
 			0,
 			false,
 		},
+		{
+			"aocd6p2",
+			getHandle(t, "testdata/input2.txt"),
+			256,
+			0,
+			false,
+		},
 	}
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
