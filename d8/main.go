@@ -29,10 +29,11 @@ func p1(r io.Reader) (int, error) {
 	return count, nil
 }
 
+var vmap = map[int]string{42: "0", 17: "1", 34: "2", 39: "3", 30: "4", 37: "5", 41: "6", 25: "7", 49: "8", 45: "9"}
+
 func demap(scramble string) map[string]string {
 	scrambleN := strings.Fields(scramble)
 	histogram := make(map[rune]int)
-	vmap := map[int]string{42: "0", 17: "1", 34: "2", 39: "3", 30: "4", 37: "5", 41: "6", 25: "7", 49: "8", 45: "9"}
 
 	// get the substitution cypher character histogram
 	for _, s := range scrambleN {
